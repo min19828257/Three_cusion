@@ -1,3 +1,5 @@
+import math
+
 #쿠션여부 카운팅
 class Cusion:
     wall_cnt=0
@@ -27,7 +29,7 @@ def cusion_check(soogoo,jukgoo1,jukgoo2,left_bottom_corner,left_top_corner,right
     check_wall(soogoo,left_bottom_corner,left_top_corner,right_top_corner,right_bottom_corner)
 
     #3.쿠션의 조건이 맞나 result 1(성공) -1(실패)
-    resullt = confirm()
+    result = confirm()
     
     if(result == 1):
         return 1
@@ -37,25 +39,25 @@ def cusion_check(soogoo,jukgoo1,jukgoo2,left_bottom_corner,left_top_corner,right
 
 #1.수구 적구충돌여부확인
 def check_collision(soogoo,jukgoo1,jukgoo2):
-    distance1 = int(soogoo) - int(jukgoo1)
-    distance2 = int(soogoo) - int(jukgoo2)
+    distance1 = math.sqrt((int(soogoo[0]) - int(jukgoo1[0]))**2 + (int(soogoo[1]) - int(jukgoo1[1]))**2)
+    distance2 = math.sqrt((int(soogoo[0]) - int(jukgoo2[0]))**2 + (int(soogoo[1]) - int(jukgoo2[1]))**2)
 
-    if(distance1 == 0 | distance2 == 0):
+    if(float(distance1) == 0 or float(distance2) == 0):
         Cusion.ball_cnt += 1
 
 #2.사각지점 통해 수구가 벽을 3번맞췄는가
 def check_wall(soogoo,left_bottom_corner,left_top_corner,right_top_corner,right_bottom_corner):
     # 각각의 당구공 x,y좌표들을 계산해야
-    distance_soogoo_l_b_c = int(soogoo) - int(left_bottom_corner)
-    distance_soogoo_l_t_c = int(soogoo) - int(left_top_corner)
-    distance_soogoo_r_t_c = int(soogoo) - int(right_top_corner)
-    distance_soogoo_r_b_c = int(soogoo) - int(right_botoom_corner)
+    distance_soogoo_l_b_c = math.sqrt((int(soogoo[0]) - int(left_bottom_corner[0]))**2 + (int(soogoo[1]) - int(left_bottom_corner[1]))**2)
+    distance_soogoo_l_t_c = math.sqrt((int(soogoo[0]) - int(left_top_corner[0]))**2 + (int(soogoo[1]) - int(left_top_corner[1]))**2)
+    distance_soogoo_r_t_c = math.sqrt((int(soogoo[0]) - int(right_top_corner[0]))**2 + (int(soogoo[1]) - int(right_top_corner[1]))**2)
+    distance_soogoo_r_b_c = math.sqrt((int(soogoo[0]) - int(right_bottom_corner[0]))**2 + (int(soogoo[1]) - int(right_bottom_corner[1]))**2)
 
-    if(distance_soogoo_r_b_c == 0 | distance_soogoo_r_t_c == 0 | distance_soogoo_l_t_c==0 | distance_soogoo_l_b_c==0):
+    if(distance_soogoo_r_b_c == 0 or distance_soogoo_r_t_c == 0 or distance_soogoo_l_t_c==0 or distance_soogoo_l_b_c==0):
         Cusion.wall_cnt += 1
 
 #3.쿠션의 조건이 맞나 result 1(성공) -1(실패)
-def confirm(self):
+def confirm():
     if(Cusion.ball_cnt > 1):
         print("공 충돌2번 오케이")
         if(Cusion.wall_cnt > 2):

@@ -1,7 +1,7 @@
 from socket import *
 
 clientSock = socket(AF_INET, SOCK_STREAM)
-clientSock.connect(('192.168.35.9', 8080))
+clientSock.connect(('210.119.88.174', 8080))
 
 print('연결 확인 됐습니다.')
 

@@ -24,8 +24,9 @@ def socket_set(ip,port):
     
     sg,jg1,jg2,l_b_c,l_t_c,r_t_c,r_b_c = classi(data)
     answer = Check(sg,jg1,jg2,l_b_c,l_t_c,r_t_c,r_b_c)
+    answer = str(answer)
 
     connectionSock.send(answer.encode('utf-8'))
     print('메시지를 보냈습니다.')
 
-socket_set('192.168.35.9',8080)
+socket_set('210.119.88.174',8080)
